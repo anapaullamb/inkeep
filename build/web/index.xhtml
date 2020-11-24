@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <style type="text/css">
+        .list-group-item {
+            border: none !important;
+        }
+        h1 {
+            margin: 50px 0;
+            font-size: 50px;
+            color: white;
+            text-align: center;
+        }
+
+        .ui-datalist-content {
+            padding: 0px !important;
+            border: none;
+            width: 100%;
+        }
+        .ui-inplace-display{
+            margin: 0px 10px !important;
+            
+        }
+        .ui-widget-content .ui-inputfield {
+            box-shadow: none;
+            margin-left: 10px;
+        }
+        .ui-inplace-display:hover{
+            background: transparent !important;
+            color: #ff816d;
+            text-shadow: none;
+        }
+        ul {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        .list-group-item div{
+            display: inline;
+            width: 100%;
+        }
+        .input-card{ 
+            width: 93% !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .button-add{
+            width: 6% !important;
+            background: transparent;
+            border: solid 1px;
+            color: black;
+        }
+        .button-remover{
+            border: none !important;
+            background: transparent !important;
+        }
+        .inserir-tarefa{
+              box-shadow:
+                0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+                0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+                0 12.5px 10px rgba(0, 0, 0, 0.06),
+                0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+                0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+                0 100px 80px rgba(0, 0, 0, 0.12)
+              ;
+            min-height: 200px;
+            width: 50vw;
+            margin: 0 100px;
+            background: white;
+            border-radius: 5px;
+        }
+    </style>
+    
+
+    <div class="container">
+        <p:growl showDetail="true"><p:autoUpdate></p:autoUpdate></p:growl>
+        <h1 >INKEEP</h1>
+        <div class="inserir-tarefa">
+            <div class="card">
+                <div class="card-header" style="background-color: white">
+                    <h:form style="align-items: center !important">
+                        <p:inputText value="#{tarefaBean.entidade.titulo}" placeholder="Qual sua proxima tarefa?" styleClass="input-card"></p:inputText>
+                        <p:commandLink action="#{tarefaBean.salvar()}" styleClass="button-add" update="@form :form-table"><i class="pi pi-check"></i></p:commandLink>
+                        #{tarefaBean.listar()}
+                    </h:form>
+                </div>
+            </div>
+
+            <h:form id="form-table">
+                <ul class="list-group" style="padding: 0">
+                    <p:dataList  id="table" style="padding: 0" styleClass="table" value="#{tarefaBean.entidades}" var="tarefa" itemType="none"> 
+                        <li class="list-group-item">
+                            <p:selectBooleanCheckbox value="#{tarefa.concluido}" >
+                                <p:ajax event="change" listener="#{tarefaBean.editar(tarefa)}" update="@form :form-table"></p:ajax>
+                            </p:selectBooleanCheckbox>
+
+                            <p:inplace id="ajax" editor="true" style="width: 195px !important" event="dblclick" saveLabel="#{tarefaBean.editar(tarefa)}">
+                                <p:inputText value="#{tarefa.titulo}" required="true" label="text"/>
+                            </p:inplace>
+
+                            <p:commandLink action="#{tarefaBean.deletar(tarefa)}" styleClass="button-remover" style="float: right; display: block; vertical-align: middle" update="@form"><i class="pi pi-times"></i></p:commandLink>
+
+                        </li>
+                    </p:dataList >
+                </ul>       
+            </h:form> 
+        </div>
+    </div>
+</ui:decorate>
+
