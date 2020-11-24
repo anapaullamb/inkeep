@@ -18,7 +18,7 @@ public class TarefaDAO implements CrudDAO<Tarefa>{
             Connection conexao = FabricaConexao.getConexao();
             PreparedStatement ps;
             if(tarefa.getId() == null){
-                ps = conexao.prepareStatement("INSERT INTO `tarefa` (`titulo`,`concluido`) VALUES (?,?)");
+                ps = conexao.prepareStatement("INSERT INTO tarefa(titulo,concluido) VALUES (?,?)");
             } else {
                 ps = conexao.prepareStatement("update tarefa set titulo=?, concluido=? where id=?");
                 ps.setInt(3, tarefa.getId());
