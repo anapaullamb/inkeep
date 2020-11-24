@@ -1,8 +1,10 @@
+![Imagem da plataforma](https://i.imgur.com/4XVPyhb.jpg)
+
 # INKEEP [![Author](https://img.shields.io/badge/author-anapaullamb-7225d0?style=flat-square)](https://github.com/anapaullamb)
 
 O Inkeep é uma plataforma de gerenciamento de anotações construido com JSF utilizando o framework PrimeFaces que permite que o usuário crie e admnistre suas anotações, lembretes ou tarefas simples.
 
-## :scroll: Itens Implementados
+## :page_with_curl: Itens Implementados
 
   A, B, F, G, J
   
